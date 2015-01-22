@@ -56,13 +56,13 @@
 ###한달단위로 받아 오는 법
 scYmd에 Year.Month의 형식으로 값을 전달하면 됩니다.
 
-ex) scYmd=2014.12
+*ex) scYmd=2014.12*
 
 ###하루단위로 받아 오는 법
 
 scYmd에 Year.Month.Day의 형식으로 값을 전달하면 됩니다.
 
-ex) scYmd=2014.12.11
+*ex) scYmd=2014.12.11*
 
 ###사용 예시
 http://1.234.91.209/~onionlee/anione_web/meal.php?ctCode=12&scCode=H100000530&scKndCode=4&scYmd=2014.12
