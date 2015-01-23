@@ -51,9 +51,9 @@ class mealAPI
 
             $this->makeRawData($baseURL);
             $this->makeJsonData();
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
     public function getCtCode($code)
@@ -158,7 +158,7 @@ class mealAPI
                 } else if ($value == '[석식]') {
                     return 'dn';
                 } else {
-                    return FALSE;
+                    return false;
                 }
             };
             
