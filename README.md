@@ -17,7 +17,7 @@
 메뉴배열 = 메뉴를 저장하는 배열
 
 ##URL
-[http://1.234.91.209/~onionlee/anione_web/meal.php]
+http://1.234.91.209/~onionlee/anione_web/meal.php
 
 ##파라미터
 * ctCode 교육청 지역 코드 
@@ -46,6 +46,8 @@
 * 대구광역시 교육청 = 15
 
 ##학교 코드
+https://docs.google.com/spreadsheets/d/1wQAAgerZzxGLgn_26d5PJE02x19H2SDN1lBxadPQBB8/edit?usp=sharing
+검색하는 함수 만들기 힘드네요ㅠㅠ 엑셀 어려워
 
 ##학교 종류 코드
 * 유치원 = 1
