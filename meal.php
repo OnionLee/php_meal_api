@@ -181,5 +181,3 @@ class mealAPI
         $this->jsonData = json_encode($mealData, JSON_UNESCAPED_UNICODE);
     }
 }
-
-?>
