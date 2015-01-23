@@ -1,7 +1,7 @@
 <?php
-header("Content-type: application/json; charset=utf-8");
+header('Content-type: application/json; charset=utf-8');
 //error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+//ini_set('display_errors', 1);
 
 $meal = new mealAPI;
 if($meal->init())
@@ -10,7 +10,7 @@ if($meal->init())
 }
 else
 {
-    echo "error";
+    echo 'error';
 }
 
 
@@ -29,7 +29,7 @@ class mealAPI
 		$scCode = $_GET['scCode'];
 		$scKndCode = $_GET['scKndCode'];
 		$scYmd = $_GET['scYmd'];
-		$scYmd = explode(".",$scYmd);
+		$scYmd = explode('.',$scYmd);
 
 		if($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1])
 		{
@@ -42,19 +42,19 @@ class mealAPI
 		    }
 			        
 		    $code1 = $scKndCode;
-			$code2 = "0".$scKndCode;
+			$code2 = '0'.$scKndCode;
 			//애니원고 코드 : H100000530
 			//http://hes.use.go.kr/sts_sci_md00_003.do?schulCode=H100000530&schulCrseScCode=4&schulKndScCode=04&schMmealScCode=02&schYm=2014.12
-			$baseURL = "http://hes.";
+			$baseURL = 'http://hes.';
 			$baseURL = $baseURL.$this->getCtCode($ctCode);
-			$baseURL = $baseURL."/sts_sci_md00_003.do?schulCode=";
+			$baseURL = $baseURL.'/sts_sci_md00_003.do?schulCode=';
 			$baseURL = $baseURL.$scCode;
-			$baseURL = $baseURL."&schulCrseScCode=";
+			$baseURL = $baseURL.'&schulCrseScCode=';
 			$baseURL = $baseURL.$code1;
-			$baseURL = $baseURL."&schulKndScCode=";
+			$baseURL = $baseURL.'&schulKndScCode=';
 			$baseURL = $baseURL.$code2;
-			$baseURL = $baseURL."&schMmealScCode=01&schYm=";
-			$baseURL = $baseURL.$this->year.".";
+			$baseURL = $baseURL.'&schMmealScCode=01&schYm=';
+			$baseURL = $baseURL.$this->year.'.';
 			$baseURL = $baseURL.$this->month;
 
 			$this->makeRawData($baseURL);
@@ -71,37 +71,37 @@ class mealAPI
 		$numCode = intval($code);
 		switch ($numCode) {
 			case 0:
-				return "sen.go.kr";
+				return 'sen.go.kr';
 			case 1:
-				return "goe.go.kr";
+				return 'goe.go.kr';
 			case 2:
-				return "kwe.go.kr";
+				return 'kwe.go.kr';
 			case 3:
-				return "jne.go.kr";
+				return 'jne.go.kr';
 			case 4:
-				return "jbe.go.kr";
+				return 'jbe.go.kr';
 			case 5:
-				return "gne.go.kr";
+				return 'gne.go.kr';
 			case 6:
-				return "kbe.go.kr";
+				return 'kbe.go.kr';
 			case 7:
-				return "pen.go.kr";
+				return 'pen.go.kr';
 			case 8:
-				return "jje.go.kr";
+				return 'jje.go.kr';
 			case 9:
-				return "cne.go.kr";
+				return 'cne.go.kr';
 			case 10:
-				return "cbe.go.kr";
+				return 'cbe.go.kr';
 			case 11:
-				return "gen.go.kr";
+				return 'gen.go.kr';
 			case 12:
-				return "use.go.kr";
+				return 'use.go.kr';
 			case 13:
-				return "dje.go.kr";
+				return 'dje.go.kr';
 			case 14:
-				return "ice.go.kr";
+				return 'ice.go.kr';
 			case 15:
-				return "dge.go.kr";
+				return 'dge.go.kr';
 		}
 		return null;
 	}
@@ -137,21 +137,21 @@ class mealAPI
 
 	function makeJsonData()
 	{
-		$baseData = explode("#$!#$!", $this->rawData);
+		$baseData = explode('#$!#$!', $this->rawData);
 		$infoBaseData = array();
 		$mealBaseData = array();
 		
 		$infoBaseData = $baseData[0];
 		$mealBaseData = $baseData[1];
 		
-		$mealArray = explode("#$!", $mealBaseData);
+		$mealArray = explode('#$!', $mealBaseData);
 		array_filter($mealArray);
 		
 		$mealData = array();
 		for($i = 0; $i<count($mealArray); $i++)
 		{
 			//공백으로 문자 제거
-			$array = preg_split("/[\s,]+/",$mealArray[$i]);
+			$array = preg_split('/[\s,]+/',$mealArray[$i]);
 			//첫번째 인자는 날짜
             if($array[0])
             {
@@ -168,17 +168,17 @@ class mealAPI
 			$data = &$mealData[$key];
 			
 			$isMealType = function($value){
-				if($value == "[조식]")
+				if($value == '[조식]')
 				{
-					return "bf";
+					return 'bf';
 				}
-				elseif($value == "[중식]")
+				elseif($value == '[중식]')
 				{
-					return "lc";
+					return 'lc';
 				}
-				elseif($value == "[석식]")
+				elseif($value == '[석식]')
 				{
-					return "dn";
+					return 'dn';
 				}
 				else
 				{
