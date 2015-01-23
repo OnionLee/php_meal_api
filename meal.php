@@ -13,6 +13,7 @@ else
     echo "error";
 }
 
+
 class mealAPI
 {
 	public $rawData;
@@ -32,6 +33,7 @@ class mealAPI
 
 		if($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1])
 		{
+
 		    $this->year = intval($scYmd[0]);
 		    $this->month = intval($scYmd[1]);
 		    if($scYmd[2])
@@ -44,7 +46,7 @@ class mealAPI
 			//애니원고 코드 : H100000530
 			//http://hes.use.go.kr/sts_sci_md00_003.do?schulCode=H100000530&schulCrseScCode=4&schulKndScCode=04&schMmealScCode=02&schYm=2014.12
 			$baseURL = "http://hes.";
-			$baseURL = $baseURL.$ctCode;
+			$baseURL = $baseURL.$this->getCtCode($ctCode);
 			$baseURL = $baseURL."/sts_sci_md00_003.do?schulCode=";
 			$baseURL = $baseURL.$scCode;
 			$baseURL = $baseURL."&schulCrseScCode=";
@@ -63,6 +65,45 @@ class mealAPI
 		{
 			return FALSE;
 		}
+	}
+	function getCtCode($code)
+	{
+		$numCode = intval($code);
+		switch ($numCode) {
+			case 0:
+				return "sen.go.kr";
+			case 1:
+				return "goe.go.kr";
+			case 2:
+				return "kwe.go.kr";
+			case 3:
+				return "jne.go.kr";
+			case 4:
+				return "jbe.go.kr";
+			case 5:
+				return "gne.go.kr";
+			case 6:
+				return "kbe.go.kr";
+			case 7:
+				return "pen.go.kr";
+			case 8:
+				return "jje.go.kr";
+			case 9:
+				return "cne.go.kr";
+			case 10:
+				return "cbe.go.kr";
+			case 11:
+				return "gen.go.kr";
+			case 12:
+				return "use.go.kr";
+			case 13:
+				return "dje.go.kr";
+			case 14:
+				return "ice.go.kr";
+			case 15:
+				return "dge.go.kr";
+		}
+		return null;
 	}
 
 	function getRawData()
