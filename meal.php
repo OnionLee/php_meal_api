@@ -2,12 +2,9 @@
 header('Content-type: application/json; charset=utf-8');
 
 $meal = new mealAPI;
-if($meal->init())
-{
+if ($meal->init()) {
     echo $meal->getJsonData();
-}
-else
-{
+} else {
     echo 'error';
 }
 
@@ -29,13 +26,10 @@ class mealAPI
         $scYmd = $_GET['scYmd'];
         $scYmd = explode('.',$scYmd);
 
-        if($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1])
-        {
-
+        if ($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1]) {
             $this->year = intval($scYmd[0]);
             $this->month = intval($scYmd[1]);
-            if($scYmd[2])
-            {
+            if ($scYmd[2]) {
                 $this->day = intval($scYmd[2]);
             }
                     
@@ -58,9 +52,7 @@ class mealAPI
             $this->makeRawData($baseURL);
             $this->makeJsonData();
             return TRUE;
-        }
-        else
-        {
+        } else {
             return FALSE;
         }
     }
@@ -111,14 +103,11 @@ class mealAPI
 
     function getJsonData()
     {
-        if($this->day)
-        {
+        if ($this->day) {
             $data = json_decode($this->jsonData);
             $json = json_encode($data->{$this->day},JSON_UNESCAPED_UNICODE);
             return $json;
-        }
-        else
-        {
+        } else {
             return $this->jsonData;
         }
     }
@@ -146,55 +135,40 @@ class mealAPI
         array_filter($mealArray);
         
         $mealData = array();
-        for($i = 0; $i<count($mealArray); $i++)
-        {
+        for ($i = 0; $i<count($mealArray); $i++) {
             //공백으로 문자 제거
             $array = preg_split('/[\s,]+/',$mealArray[$i]);
             //첫번째 인자는 날짜
-            if($array[0])
-            {
+            if ($array[0]) {
                 $key = $array[0];
                 //날짜를 key로 가지는 데이터 만들기
                 $mealData[(string)$key] = array();
-            }
-            else
-            {
+            } else {
                 continue;
             }
             
             //참조로 data
             $data = &$mealData[$key];
             
-            $isMealType = function($value){
-                if($value == '[조식]')
-                {
+            $isMealType = function ($value) {
+                if ($value == '[조식]') {
                     return 'bf';
-                }
-                elseif($value == '[중식]')
-                {
+                } else if ($value == '[중식]') {
                     return 'lc';
-                }
-                elseif($value == '[석식]')
-                {
+                } else if ($value == '[석식]') {
                     return 'dn';
-                }
-                else
-                {
+                } else {
                     return FALSE;
                 }
             };
             
-            for($j = 1 ; $j < count($array); $j++)
-            {
+            for ($j = 1; $j < count($array); $j++) {
                 $key = $isMealType($array[$j]);
-                if($key)
-                {
+                if ($key) {
                     $data[$key] = array();
                     $mealCount = 0;
-                    for($k = $j+1; $k<count($array); $k++)
-                    {
-                        if($isMealType($array[$k]))
-                        {
+                    for ($k = $j+1; $k<count($array); $k++) {
+                        if ($isMealType($array[$k])) {
                             break;
                         }
                         $data[$key][(string)$mealCount] = $array[$k];
