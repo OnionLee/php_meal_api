@@ -18,7 +18,7 @@ class mealAPI
     public $month;
     public $day;
 
-    function init()
+    public function init()
     {
         $ctCode = $_GET['ctCode'];
         $scCode = $_GET['scCode'];
@@ -56,7 +56,7 @@ class mealAPI
             return FALSE;
         }
     }
-    function getCtCode($code)
+    public function getCtCode($code)
     {
         $numCode = intval($code);
         switch ($numCode) {
@@ -96,12 +96,12 @@ class mealAPI
         return null;
     }
 
-    function getRawData()
+    public function getRawData()
     {
         return $this->rawData;
     }
 
-    function getJsonData()
+    public function getJsonData()
     {
         if ($this->day) {
             $data = json_decode($this->jsonData);
@@ -112,7 +112,7 @@ class mealAPI
         }
     }
 
-    function makeRawData($url)
+    public function makeRawData($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -122,7 +122,7 @@ class mealAPI
     }
 
 
-    function makeJsonData()
+    public function makeJsonData()
     {
         $baseData = explode('#$!#$!', $this->rawData);
         $infoBaseData = array();
