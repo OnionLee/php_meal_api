@@ -24,7 +24,7 @@ class mealAPI
         $scCode = $_GET['scCode'];
         $scKndCode = $_GET['scKndCode'];
         $scYmd = $_GET['scYmd'];
-        $scYmd = explode('.',$scYmd);
+        $scYmd = explode('.', $scYmd);
 
         if ($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1]) {
             $this->year = intval($scYmd[0]);
@@ -105,7 +105,7 @@ class mealAPI
     {
         if ($this->day) {
             $data = json_decode($this->jsonData);
-            $json = json_encode($data->{$this->day},JSON_UNESCAPED_UNICODE);
+            $json = json_encode($data->{$this->day}, JSON_UNESCAPED_UNICODE);
             return $json;
         } else {
             return $this->jsonData;
@@ -137,7 +137,7 @@ class mealAPI
         $mealData = array();
         for ($i = 0; $i<count($mealArray); $i++) {
             //공백으로 문자 제거
-            $array = preg_split('/[\s,]+/',$mealArray[$i]);
+            $array = preg_split('/[\s,]+/', $mealArray[$i]);
             //첫번째 인자는 날짜
             if ($array[0]) {
                 $key = $array[0];
@@ -178,7 +178,7 @@ class mealAPI
             }
         }
 
-        $this->jsonData = json_encode($mealData,JSON_UNESCAPED_UNICODE);
+        $this->jsonData = json_encode($mealData, JSON_UNESCAPED_UNICODE);
     }
 }
 
