@@ -2,7 +2,7 @@
 header('Content-type: application/json; charset=utf-8');
 
 $meal = new mealAPI;
-if ($meal->init()) {
+if (!empty($meal->init())) {
     echo $meal->getJsonData();
 } else {
     echo 'error';
@@ -18,13 +18,13 @@ class mealAPI
     public $day;
 	function init()
 	{
-		
-		$ctCode = $_GET['ctCode'];
-		$scCode = $_GET['scCode'];
-		$scKndCode = $_GET['scKndCode'];
-		$scYmd = $_GET['scYmd'];
+
+		$ctCode = isset($_GET['ctCode']) ? $_GET['ctCode'] : NULL;
+		$scCode = isset($_GET['scCode']) ? $_GET['scCode'] : NULL;
+		$scKndCode = isset($_GET['scKndCode']) ? $_GET['scKndCode'] : NULL;
+		$scYmd = isset($_GET['scYmd']) ? $_GET['scYmd'] : NULL;
 		$scYmd = explode(".",$scYmd);
-		if($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1]) {
+		if(!empty($ctCode) && !empty($scCode) && !empty($scKndCode) && !empty($scYmd[0]) && !empty($scYmd[1])) {
 		    $this->year = intval($scYmd[0]);
 		    $this->month = intval($scYmd[1]);
 		    if(!empty($scYmd[2])){
