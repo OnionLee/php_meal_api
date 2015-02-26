@@ -17,7 +17,7 @@
 메뉴배열 = 메뉴를 저장하는 배열
 
 ##URL
-http://1.234.91.209/~onionlee/anione_web/meal.php
+http://1.234.91.209/~onionlee/meal/meal.php
 
 ##파라미터
 * ctCode 교육청 지역 코드 
@@ -67,4 +67,4 @@ scYmd에 Year.Month.Day의 형식으로 값을 전달하면 됩니다.
 *ex) scYmd=2014.12.11*
 
 ###사용 예시
-http://1.234.91.209/~onionlee/anione_web/meal.php?ctCode=12&scCode=H100000530&scKndCode=4&scYmd=2014.12
+http://1.234.91.209/~onionlee/meal/meal.php?ctCode=12&scCode=H100000530&scKndCode=4&scYmd=2014.12
