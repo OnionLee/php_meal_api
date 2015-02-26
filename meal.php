@@ -27,7 +27,7 @@ class mealAPI
 		if($ctCode && $scCode && $scKndCode && $scYmd[0] && $scYmd[1]) {
 		    $this->year = intval($scYmd[0]);
 		    $this->month = intval($scYmd[1]);
-		    if($scYmd[2]){
+		    if(!empty($scYmd[2])){
 		    	$this->day = intval($scYmd[2]);
 		    }
 			        
@@ -141,7 +141,7 @@ class mealAPI
 			$isMealType = function($value){
 				if($value == "[조식]") {
 					return "bf";
-				} lseif($value == "[중식]") {
+				} elseif($value == "[중식]") {
 					return "lc";
 				} elseif($value == "[석식]") {
 					return "dn";
