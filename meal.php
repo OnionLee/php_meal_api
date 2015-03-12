@@ -117,7 +117,7 @@ class mealAPI
 	function makeJsonData()
 	{
 		$subject = preg_replace('/\r\n|\r|\n/',' ',$this->rawData);
-		$pattern = '/#\\$!1(.*)\\/\\/EOR\\/\\//';
+		$pattern = '#\\$\\![0-9]{1,2}\\ (.*)\\/\\/EOR\\/\\/';
 		preg_match($pattern, $subject, $matches);
 		$mealBaseData = '#$!1'.$matches[1];
 		$mealArray = explode('#$!', $mealBaseData);
