@@ -24,13 +24,22 @@ class mealAPI
 		$scKndCode = isset($_GET['scKndCode']) ? $_GET['scKndCode'] : NULL;
 		$scYmd = isset($_GET['scYmd']) ? $_GET['scYmd'] : NULL;
 		$scYmd = explode(".",$scYmd);
-		if(!empty($ctCode) && !empty($scCode) && !empty($scKndCode) && !empty($scYmd[0]) && !empty($scYmd[1])) {
-		    $this->year = intval($scYmd[0]);
+		if(empty($ctCode) || empty($scCode) || empty($scKndCode) || empty($scYmd[0]) || empty($scYmd[1])) {
+			return FALSE;
+		} else {
+			$this->year = intval($scYmd[0]);
 		    $this->month = intval($scYmd[1]);
 		    if(!empty($scYmd[2])){
 		    	$this->day = intval($scYmd[2]);
+
+		    	if ($this->day < 1 || $this->day > 31)
+		    		return FALSE;
 		    }
-			        
+		    if($this->year < 2000 || $this->year > 3000)
+		    	return FALSE;
+		    if ($this->month < 1 || $this->month > 12)
+		    	return FALSE;
+		    	        
 		    $code1 = $scKndCode;
 			$code2 = "0".$scKndCode;
 			//애니원고 코드 : H100000530
@@ -45,12 +54,10 @@ class mealAPI
 			$baseURL = $baseURL.$code2;
 			$baseURL = $baseURL."&schMmealScCode=01&schYm=";
 			$baseURL = $baseURL.$this->year.".";
-			$baseURL = $baseURL.$this->month;
+			$baseURL = $baseURL.str_pad($this->month, 2, '0', STR_PAD_LEFT);
 			$this->makeRawData($baseURL);
 			$this->makeJsonData();
 			return TRUE;
-		} else {
-			return FALSE;
 		}
 	}
 	function getCtCode($code)
@@ -117,7 +124,7 @@ class mealAPI
 	function makeJsonData()
 	{
 		$subject = preg_replace('/\r\n|\r|\n/',' ',$this->rawData);
-		$pattern = '#\\$\\![0-9]{1,2}\\ (.*)\\/\\/EOR\\/\\/';
+		$pattern = '/\\#\\$\\![0-9]{1,2}\\b(.*)\\/\\/EOR\\/\\//';
 		preg_match($pattern, $subject, $matches);
 		$mealBaseData = '#$!1'.$matches[1];
 		$mealArray = explode('#$!', $mealBaseData);
