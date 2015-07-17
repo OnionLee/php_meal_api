@@ -52,8 +52,9 @@ class mealAPI
 			$baseURL = $baseURL.$code1;
 			$baseURL = $baseURL."&schulKndScCode=";
 			$baseURL = $baseURL.$code2;
-			$baseURL = $baseURL."&schMmealScCode=01&schYm=";
-			$baseURL = $baseURL.$this->year.".";
+			$baseURL = $baseURL."&ay=";
+			$baseURL = $baseURL.$this->year;
+			$baseURL = $baseURL."&mm=";
 			$baseURL = $baseURL.str_pad($this->month, 2, '0', STR_PAD_LEFT);
 			$this->makeRawData($baseURL);
 			$this->makeJsonData();
